@@ -4,9 +4,6 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
-    commands:
-      - echo "Updating system packages"
-      - apt-get update -y
   pre_build:
     commands:
       - echo "Setting AWS access key"

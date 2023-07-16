@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Updating system packages"
+      - apt-get update -y
+  pre_build:
+    commands:
+      - echo "Setting AWS access key"
+      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      - echo "Setting AWS secret access key"
+      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - echo "Setting AWS region $AWS_REGION"
+      - aws configure set region $AWS_REGION
+      - echo "Cloning repository $REPO_NAME, please make sure that is a Public Repository!"
+      - git clone https://github.com/FtxDante/$REPO_NAME
+  build:
+    commands:
+      - echo "Entering the repository"
+      - cd $REPO_NAME
+      - echo "Checking contents of the directory"
+      - echo $(ls)
+  post_build:
+    commands:
+      - echo "Deleting old files of the bucket"
+      - aws s3 rm s3://$BUCKET_NAME --recursive
+      - echo "Uploading files $REPO_NAME to S3 bucket $BUCKET_NAME"
+      - aws s3 cp . s3://$BUCKET_NAME/

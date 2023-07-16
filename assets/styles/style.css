@@ -1,3 +1,8 @@
+:root {
+  font-size: 20px;
+  /* Defina o tamanho desejado para o rem */
+}
+
 body,
 html {
   margin: 0;
@@ -113,6 +118,11 @@ body p {
   min-width: 200px;
   padding: 5px;
   color: white;
+}
+
+.about-button:active {
+  transform: scale(0.9);
+  transition: transform 0.2s ease-in-out;
 }
 
 .flex-about-section {

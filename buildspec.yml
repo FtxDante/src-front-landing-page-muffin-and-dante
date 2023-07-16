@@ -25,4 +25,4 @@ phases:
       - echo "Deleting old files of the bucket"
       - aws s3 rm s3://$BUCKET_NAME --recursive
       - echo "Uploading files $REPO_NAME to S3 bucket $BUCKET_NAME"
-      - aws s3 cp . s3://$BUCKET_NAME/
+      - aws s3 cp * s3://$BUCKET_NAME/
